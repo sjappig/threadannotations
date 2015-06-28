@@ -1,0 +1,8 @@
+dependencies {
+	compile project(':taif')
+}
+jar {
+	manifest {
+		attributes 'Premain-Class': 'com.github.sjappig.ta.TAAgent'
+	}
+}

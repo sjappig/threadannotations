@@ -1,0 +1,15 @@
+# compiled classes
+###################
+*.class
+build/
+bin/
+
+# eclipse
+###################
+.project
+.classpath
+.settings/
+
+# gradle
+###################
+.gradle/
