@@ -7,10 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.TYPE })
-public @interface SingleThread {
-	/***
-	 * threadId: [0, 99]
-	 */
-	short threadId() default 0;
-
+public @interface MultiThread {
 }
