@@ -9,8 +9,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.TYPE })
 public @interface SingleThread {
 	/***
-	 * threadId: [0, 99]
+	 * threadId: [0, Integer.MAX_VALUE]
 	 */
-	short threadId() default 0;
-
+	int threadId() default 0;
 }
