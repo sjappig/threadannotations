@@ -8,11 +8,10 @@ import org.slf4j.LoggerFactory;
 import com.github.sjappig.ta.internal.TATransformer;
 
 public class TAAgent {
-
 	private static Logger log = LoggerFactory.getLogger(TAAgent.class);
 
 	public static void premain(String args, Instrumentation inst) {
-		log.debug("Entered java-agent premain");
+		log.info("Entered java-agent premain");
 		inst.addTransformer(new TATransformer());
 	}
 

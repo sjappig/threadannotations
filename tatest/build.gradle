@@ -1,0 +1,11 @@
+apply plugin: 'application'
+
+dependencies {
+	compile 'org.slf4j:slf4j-simple:1.7.+',
+            project(':taif')
+    runtime project(':taagent')
+}
+
+mainClassName = "com.github.sjappig.ta.TATest"
+def slf4j = project.configurations.compile.find { it.name.startsWith("slf4j-api-") }
+applicationDefaultJvmArgs = ["-javaagent:" + project(':taagent').jar.archivePath]

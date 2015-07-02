@@ -65,4 +65,9 @@ class MethodInfo {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "MethodInfo [access=" + this.access + ", name=" + this.name + ", desc=" + this.desc + ", signature="
+				+ this.signature + ", exceptions=" + Arrays.toString(this.exceptions) + "]";
+	}
 }

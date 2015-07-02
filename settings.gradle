@@ -1,1 +1,1 @@
-include 'taif', 'taagent'
+include 'taif', 'taagent', 'tatest'

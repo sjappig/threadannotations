@@ -28,4 +28,10 @@ class ThreadAnnotation {
 	int threadId() {
 		return this.threadId;
 	}
+
+	@Override
+	public String toString() {
+		return "ThreadAnnotation [annotation=" + this.annotation + ", threadId=" + this.threadId + "]";
+	}
+
 }
