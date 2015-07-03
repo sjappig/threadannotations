@@ -2,6 +2,8 @@ package com.github.sjappig.ta.internal;
 
 import java.util.Arrays;
 
+import org.objectweb.asm.Opcodes;
+
 class MethodInfo {
 
 	private final int access;
@@ -16,6 +18,10 @@ class MethodInfo {
 		this.desc = desc;
 		this.signature = signature;
 		this.exceptions = exceptions;
+	}
+
+	boolean isStatic() {
+		return this.access == Opcodes.ACC_STATIC;
 	}
 
 	boolean isConstructor() {

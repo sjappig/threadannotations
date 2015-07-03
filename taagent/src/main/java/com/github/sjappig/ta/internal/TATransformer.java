@@ -18,7 +18,7 @@ public class TATransformer implements ClassFileTransformer {
 	public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
 			ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
 		ClassReader classReader = new ClassReader(classfileBuffer);
-		ClassInfoVisitor classInfoVisitor = new ClassInfoVisitor();
+		ClassInfoVisitor classInfoVisitor = new ClassInfoVisitor(className);
 		classReader.accept(classInfoVisitor, 0);
 		if (classInfoVisitor.isAnnotated()) {
 			if (classInfoVisitor.isClassAnnotated()) {

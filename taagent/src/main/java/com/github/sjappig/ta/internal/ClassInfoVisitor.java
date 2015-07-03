@@ -13,11 +13,13 @@ import com.github.sjappig.ta.SingleThread;
 import com.github.sjappig.ta.SwingThread;
 
 class ClassInfoVisitor extends ClassVisitor implements ClassAnnotationInfo {
-	private ThreadAnnotation classAnnotation = null;
+	private final String className;
 	private final Map<MethodInfo, ThreadAnnotation> methodAnnotations = new HashMap<>();
+	private ThreadAnnotation classAnnotation = null;
 
-	public ClassInfoVisitor() {
+	public ClassInfoVisitor(String className) {
 		super(TATransformer.API);
+		this.className = className;
 	}
 
 	@Override
@@ -44,6 +46,11 @@ class ClassInfoVisitor extends ClassVisitor implements ClassAnnotationInfo {
 				});
 			}
 		};
+	}
+
+	@Override
+	public String className() {
+		return this.className;
 	}
 
 	@Override

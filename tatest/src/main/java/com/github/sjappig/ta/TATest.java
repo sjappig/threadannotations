@@ -19,5 +19,8 @@ public class TATest {
 
 	public static void main(String args[]) {
 		log.info("TATest main");
+		TATest taTest = new TATest();
+		taTest.testMethod1();
+		taTest.testMethod2();
 	}
 }
