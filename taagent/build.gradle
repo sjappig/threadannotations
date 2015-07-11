@@ -1,5 +1,6 @@
 dependencies {
-	compile project(':taif')
+	compile 	project(':taif')
+	testCompile 'junit:junit:4.12'
 }
 jar {
 	manifest {

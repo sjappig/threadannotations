@@ -1,19 +1,25 @@
 package com.github.sjappig.ta.internal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.swing.SwingUtilities;
+
+import com.github.sjappig.ta.SwingThread;
 
 public class InterceptionObjectImpl implements InterceptionObject {
 
-	private static final Logger log = LoggerFactory.getLogger(InterceptionObjectImpl.class);
-
-	public InterceptionObjectImpl() {
-		log.info("InterceptionObject constructor");
-	}
+	private static final String SWING_THREAD_ANNOTATION_NAME = SwingThread.class.getName();
 
 	@Override
-	public void intercept() {
-		log.info("intercept");
+	public void intercept(int methodId, String classAnnotation, int caThreadId, String methodAnnotation, int maThreadId) {
+		if (methodAnnotation.equals(SWING_THREAD_ANNOTATION_NAME)) {
+			handleSwingThread();
+		}
+	}
+
+	private void handleSwingThread() {
+		if (!SwingUtilities.isEventDispatchThread()) {
+			throw new IllegalStateException("Expected call from Swing-thread, was called from "
+					+ Thread.currentThread().getName());
+		}
 	}
 
 }

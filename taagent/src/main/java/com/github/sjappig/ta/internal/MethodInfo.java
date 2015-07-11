@@ -21,7 +21,7 @@ class MethodInfo {
 	}
 
 	boolean isStatic() {
-		return this.access == Opcodes.ACC_STATIC;
+		return (this.access & Opcodes.ACC_STATIC) == Opcodes.ACC_STATIC;
 	}
 
 	boolean isConstructor() {

@@ -7,5 +7,4 @@ dependencies {
 }
 
 mainClassName = "com.github.sjappig.ta.TATest"
-def slf4j = project.configurations.compile.find { it.name.startsWith("slf4j-api-") }
 applicationDefaultJvmArgs = ["-javaagent:" + project(':taagent').jar.archivePath]
