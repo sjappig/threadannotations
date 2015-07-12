@@ -8,10 +8,6 @@ interface ClassAnnotationInfo {
 
 	boolean isAnnotated();
 
-	boolean isClassAnnotated();
-
-	boolean areMethodsAnnotated();
-
 	ThreadAnnotation classAnnotation();
 
 	Map<MethodInfo, ThreadAnnotation> methodAnnotations();

@@ -17,7 +17,7 @@ import org.junit.Test;
 public class TestInterceptionObjectImpl {
 
 	private static final List<String> ANNOTATIONS = Arrays.asList(InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME,
-			InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME);
+	        InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME);
 
 	private InterceptionObjectImpl interceptionObjectImpl;
 	private ExecutorService executorService;
@@ -35,52 +35,52 @@ public class TestInterceptionObjectImpl {
 
 	@Test(expected = IllegalStateException.class)
 	public void whenMethodSwingThreadAnnotationGivenAndInvokedFromNonSwingThreadShouldThrow() {
-		mainThreadInvoke(1, "", 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+		mainThreadInvoke("", 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
 	}
 
 	@Test
 	public void whenMethodSwingThreadAnnotationGivenAndInvokedFromSwingThreadShouldSucceed() throws Throwable {
-		swingThreadInvoke(1, "", 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+		swingThreadInvoke("", 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void whenClassSwingThreadAnnotationGivenAndInvokedFromNonSwingThreadShouldThrow() {
-		mainThreadInvoke(1, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0, "", 0);
+		mainThreadInvoke(InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0, "", 0);
 	}
 
 	@Test
 	public void whenClassSwingThreadAnnotationGivenAndInvokedFromSwingThreadShouldSucceed() throws Throwable {
-		swingThreadInvoke(1, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0, "", 0);
+		swingThreadInvoke(InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0, "", 0);
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void whenMethodSingleThreadAnnotationGivenAndInvokedInDifferentThreadsShouldThrow() throws Throwable {
-		mainThreadInvoke(1, "", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
-		otherThreadInvoke(1, "", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+		mainThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+		otherThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
 	}
 
 	@Test
 	public void whenMethodSingleThreadAnnotationGivenAndInvokedInOneThreadsShouldSucceed() throws Throwable {
-		mainThreadInvoke(1, "", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
-		mainThreadInvoke(1, "", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
-		otherThreadInvoke(1, "", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 1);
-		otherThreadInvoke(1, "", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 1);
-		swingThreadInvoke(1, "", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 2);
-		swingThreadInvoke(1, "", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 2);
+		mainThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+		mainThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+		otherThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 1);
+		otherThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 1);
+		swingThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 2);
+		swingThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 2);
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void whenClassSingleThreadAnnotationGivenAndInvokedInDifferentThreadsShouldThrow() throws Throwable {
-		mainThreadInvoke(1, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0, "", 0);
-		otherThreadInvoke(1, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0, "", 0);
+		mainThreadInvoke(InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0, "", 0);
+		otherThreadInvoke(InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0, "", 0);
 	}
 
 	@Test
 	public void whenMethodMultiThreadAnnotationGivenShouldSucceedAlways() throws Throwable {
 		for (String annotation : ANNOTATIONS) {
-			mainThreadInvoke(1, annotation, 0, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME, 0);
-			swingThreadInvoke(1, annotation, 0, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME, 0);
-			otherThreadInvoke(1, annotation, 0, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME, 0);
+			mainThreadInvoke(annotation, 0, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME, 0);
+			swingThreadInvoke(annotation, 0, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME, 0);
+			otherThreadInvoke(annotation, 0, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME, 0);
 		}
 	}
 
@@ -90,17 +90,17 @@ public class TestInterceptionObjectImpl {
 			boolean mainThreadThrew = false;
 			boolean otherThreadThrew = false;
 			try {
-				mainThreadInvoke(1, annotation, 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+				mainThreadInvoke(annotation, 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
 			} catch (IllegalStateException e) {
 				mainThreadThrew = true;
 			}
 			try {
-				otherThreadInvoke(1, annotation, 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+				otherThreadInvoke(annotation, 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
 			} catch (IllegalStateException e) {
 				otherThreadThrew = true;
 			}
 			Assert.assertTrue(mainThreadThrew && otherThreadThrew);
-			swingThreadInvoke(1, annotation, 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+			swingThreadInvoke(annotation, 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
 		}
 	}
 
@@ -109,14 +109,14 @@ public class TestInterceptionObjectImpl {
 		for (String annotation : ANNOTATIONS) {
 			boolean swingThreadThrew = false;
 			boolean otherThreadThrew = false;
-			mainThreadInvoke(1, annotation, 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+			mainThreadInvoke(annotation, 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
 			try {
-				swingThreadInvoke(1, annotation, 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+				swingThreadInvoke(annotation, 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
 			} catch (IllegalStateException e) {
 				swingThreadThrew = true;
 			}
 			try {
-				otherThreadInvoke(1, annotation, 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+				otherThreadInvoke(annotation, 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
 			} catch (IllegalStateException e) {
 				otherThreadThrew = true;
 			}
@@ -124,19 +124,17 @@ public class TestInterceptionObjectImpl {
 		}
 	}
 
-	private void mainThreadInvoke(int methodId, String classAnnotation, int caThreadId, String methodAnnotation,
-	        int maThreadId) {
-		interceptionObjectImpl.intercept(methodId, classAnnotation, caThreadId, methodAnnotation, maThreadId);
+	private void mainThreadInvoke(String classAnnotation, int caThreadId, String methodAnnotation, int maThreadId) {
+		interceptionObjectImpl.intercept(classAnnotation, caThreadId, methodAnnotation, maThreadId);
 	}
 
-	private void swingThreadInvoke(final int methodId, final String classAnnotation, final int caThreadId,
-	        final String methodAnnotation, final int maThreadId) throws Throwable {
+	private void swingThreadInvoke(final String classAnnotation, final int caThreadId, final String methodAnnotation,
+			final int maThreadId) throws Throwable {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				@Override
 				public void run() {
-					interceptionObjectImpl.intercept(methodId, classAnnotation, caThreadId, methodAnnotation,
-							maThreadId);
+					interceptionObjectImpl.intercept(classAnnotation, caThreadId, methodAnnotation, maThreadId);
 				}
 			});
 		} catch (InvocationTargetException e) {
@@ -144,14 +142,13 @@ public class TestInterceptionObjectImpl {
 		}
 	}
 
-	private void otherThreadInvoke(final int methodId, final String classAnnotation, final int caThreadId,
-	        final String methodAnnotation, final int maThreadId) throws Throwable {
+	private void otherThreadInvoke(final String classAnnotation, final int caThreadId, final String methodAnnotation,
+			final int maThreadId) throws Throwable {
 		try {
 			executorService.submit(new Runnable() {
 				@Override
 				public void run() {
-					interceptionObjectImpl.intercept(methodId, classAnnotation, caThreadId, methodAnnotation,
-					        maThreadId);
+					interceptionObjectImpl.intercept(classAnnotation, caThreadId, methodAnnotation, maThreadId);
 				}
 			}).get();
 		} catch (ExecutionException e) {

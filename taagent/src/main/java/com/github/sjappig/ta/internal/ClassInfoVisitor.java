@@ -55,17 +55,7 @@ class ClassInfoVisitor extends ClassVisitor implements ClassAnnotationInfo {
 
 	@Override
 	public boolean isAnnotated() {
-		return this.isClassAnnotated() || this.areMethodsAnnotated();
-	}
-
-	@Override
-	public boolean isClassAnnotated() {
-		return this.classAnnotation != null;
-	}
-
-	@Override
-	public boolean areMethodsAnnotated() {
-		return !this.methodAnnotations.isEmpty();
+		return this.classAnnotation != null || !this.methodAnnotations.isEmpty();
 	}
 
 	@Override

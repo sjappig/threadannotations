@@ -18,7 +18,7 @@ public class InterceptionObjectImpl implements InterceptionObject {
 	private final ConcurrentHashMap<Integer, WeakReference<Thread>> singleThreadMap = new ConcurrentHashMap<>();
 
 	@Override
-	public void intercept(int methodId, String classAnnotation, int caThreadId, String methodAnnotation, int maThreadId) {
+	public void intercept(String classAnnotation, int caThreadId, String methodAnnotation, int maThreadId) {
 		if (methodAnnotation.equals(SWING_THREAD_ANNOTATION_NAME)) {
 			handleSwingThread();
 		} else if (methodAnnotation.equals(SINGLE_THREAD_ANNOTATION_NAME)) {
@@ -38,10 +38,10 @@ public class InterceptionObjectImpl implements InterceptionObject {
 			Thread expected = singleThreadMap.get(threadId).get();
 			if (expected == null) {
 				throw new IllegalStateException("Expected call from already garbage-collected thread, was called from "
-				        + currentThread.getName());
+						+ currentThread.getName());
 			} else if (!expected.equals(currentThread)) {
 				throw new IllegalStateException("Expected call from " + expected.getName() + ", was called from "
-				        + currentThread.getName());
+						+ currentThread.getName());
 			}
 		}
 	}
@@ -49,7 +49,7 @@ public class InterceptionObjectImpl implements InterceptionObject {
 	private void handleSwingThread() {
 		if (!SwingUtilities.isEventDispatchThread()) {
 			throw new IllegalStateException("Expected call from Swing-thread, was called from "
-			        + Thread.currentThread().getName());
+					+ Thread.currentThread().getName());
 		}
 	}
 }
