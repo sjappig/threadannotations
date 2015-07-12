@@ -1,10 +1,15 @@
-version = '0.1'
-
 allprojects {
-	apply plugin: 'java'
+    version = '0.1'
+
+    apply plugin: 'java'
 	apply plugin: 'eclipse'
 
 	repositories {
 		mavenCentral()
 	}
+
+    task srcJar(type: Jar, dependsOn: classes) {
+        classifier = 'src'
+        from sourceSets.main.allSource
+    }
 }

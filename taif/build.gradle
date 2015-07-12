@@ -1,0 +1,3 @@
+jar {
+    from "${rootProject.projectDir}/LICENSE"
+}

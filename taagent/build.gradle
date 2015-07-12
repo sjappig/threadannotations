@@ -8,4 +8,7 @@ jar {
 	manifest {
 		attributes 'Premain-Class': 'com.github.sjappig.ta.TAAgent'
 	}
+    doFirst {
+        from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
