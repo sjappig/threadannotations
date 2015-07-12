@@ -1,7 +1,9 @@
 dependencies {
-	compile 	project(':taif')
+	compile 	project(':taif'),
+                'org.ow2.asm:asm:5.0.+'
 	testCompile 'junit:junit:4.12'
 }
+
 jar {
 	manifest {
 		attributes 'Premain-Class': 'com.github.sjappig.ta.TAAgent'
