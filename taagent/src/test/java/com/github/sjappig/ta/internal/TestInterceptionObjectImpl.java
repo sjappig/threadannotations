@@ -17,7 +17,7 @@ import org.junit.Test;
 public class TestInterceptionObjectImpl {
 
 	private static final List<String> ANNOTATIONS = Arrays.asList(InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME,
-	        InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME);
+			InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME);
 
 	private InterceptionObjectImpl interceptionObjectImpl;
 	private ExecutorService executorService;
@@ -25,7 +25,7 @@ public class TestInterceptionObjectImpl {
 	@Before
 	public void setUp() throws Exception {
 		interceptionObjectImpl = new InterceptionObjectImpl();
-		executorService = Executors.newCachedThreadPool();
+		executorService = Executors.newFixedThreadPool(1);
 	}
 
 	@After
@@ -129,7 +129,7 @@ public class TestInterceptionObjectImpl {
 	}
 
 	private void swingThreadInvoke(final String classAnnotation, final int caThreadId, final String methodAnnotation,
-			final int maThreadId) throws Throwable {
+	        final int maThreadId) throws Throwable {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				@Override
@@ -143,7 +143,7 @@ public class TestInterceptionObjectImpl {
 	}
 
 	private void otherThreadInvoke(final String classAnnotation, final int caThreadId, final String methodAnnotation,
-			final int maThreadId) throws Throwable {
+	        final int maThreadId) throws Throwable {
 		try {
 			executorService.submit(new Runnable() {
 				@Override
