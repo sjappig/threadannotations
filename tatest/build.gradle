@@ -7,5 +7,5 @@ dependencies {
     runtime project(':taagent')
 }
 
-mainClassName = "com.github.sjappig.ta.TATest"
+mainClassName = "io.threadannotations.TATest"
 applicationDefaultJvmArgs = ["-javaagent:" + project(':taagent').jar.archivePath]

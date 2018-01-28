@@ -1,13 +1,13 @@
-package com.github.sjappig.ta.internal;
+package io.threadannotations.internal;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.SwingUtilities;
 
-import com.github.sjappig.ta.MultiThread;
-import com.github.sjappig.ta.SingleThread;
-import com.github.sjappig.ta.SwingThread;
+import io.threadannotations.MultiThread;
+import io.threadannotations.SingleThread;
+import io.threadannotations.SwingThread;
 
 public class InterceptionObjectImpl implements InterceptionObject {
 

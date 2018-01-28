@@ -1,4 +1,4 @@
-package com.github.sjappig.ta;
+package io.threadannotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

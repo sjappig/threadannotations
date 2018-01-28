@@ -1,8 +1,8 @@
-package com.github.sjappig.ta;
+package io.threadannotations;
 
 import java.lang.instrument.Instrumentation;
 
-import com.github.sjappig.ta.internal.TATransformer;
+import io.threadannotations.internal.TATransformer;
 
 public class TAAgent {
     public static void premain(String args, Instrumentation inst) {

@@ -1,4 +1,4 @@
-package com.github.sjappig.ta.internal;
+package io.threadannotations.internal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,9 +8,9 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
-import com.github.sjappig.ta.MultiThread;
-import com.github.sjappig.ta.SingleThread;
-import com.github.sjappig.ta.SwingThread;
+import io.threadannotations.MultiThread;
+import io.threadannotations.SingleThread;
+import io.threadannotations.SwingThread;
 
 class ClassInfoVisitor extends ClassVisitor implements ClassAnnotationInfo {
     private final String className;

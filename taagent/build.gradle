@@ -6,7 +6,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Premain-Class': 'com.github.sjappig.ta.TAAgent'
+        attributes 'Premain-Class': 'io.threadannotations.TAAgent'
     }
     doFirst {
         from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }

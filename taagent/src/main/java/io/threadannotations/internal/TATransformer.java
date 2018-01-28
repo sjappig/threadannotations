@@ -1,4 +1,4 @@
-package com.github.sjappig.ta.internal;
+package io.threadannotations.internal;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;

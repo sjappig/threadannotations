@@ -1,7 +1,11 @@
-package com.github.sjappig.ta;
+package io.threadannotations;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.threadannotations.MultiThread;
+import io.threadannotations.SingleThread;
+import io.threadannotations.SwingThread;
 
 @SingleThread
 public class TATest {

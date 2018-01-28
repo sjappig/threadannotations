@@ -1,4 +1,4 @@
-package com.github.sjappig.ta.internal;
+package io.threadannotations.internal;
 
 class ThreadAnnotation {
     private final Class<?> annotation;

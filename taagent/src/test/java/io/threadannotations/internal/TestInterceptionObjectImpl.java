@@ -1,4 +1,4 @@
-package com.github.sjappig.ta.internal;
+package io.threadannotations.internal;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -13,6 +13,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import io.threadannotations.internal.InterceptionObjectImpl;
 
 public class TestInterceptionObjectImpl {
 
