@@ -5,7 +5,7 @@ allprojects {
     apply plugin: 'eclipse'
 
     repositories {
-        mavenCentral()
+        jcenter()
     }
 
     task srcJar(type: Jar, dependsOn: classes) {
