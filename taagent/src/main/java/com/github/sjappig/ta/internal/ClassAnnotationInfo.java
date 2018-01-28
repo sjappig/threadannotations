@@ -4,11 +4,11 @@ import java.util.Map;
 
 interface ClassAnnotationInfo {
 
-	String className();
+    String className();
 
-	boolean isAnnotated();
+    boolean isAnnotated();
 
-	ThreadAnnotation classAnnotation();
+    ThreadAnnotation classAnnotation();
 
-	Map<MethodInfo, ThreadAnnotation> methodAnnotations();
+    Map<MethodInfo, ThreadAnnotation> methodAnnotations();
 }

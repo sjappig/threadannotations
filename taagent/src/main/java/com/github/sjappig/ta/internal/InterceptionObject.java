@@ -2,8 +2,8 @@ package com.github.sjappig.ta.internal;
 
 public interface InterceptionObject {
 
-	static String INTERCEPT_DESC = "(Ljava/lang/String;ILjava/lang/String;I)V";
+    static String INTERCEPT_DESC = "(Ljava/lang/String;ILjava/lang/String;I)V";
 
-	void intercept(String classAnnotation, int caThreadId, String methodAnnotation, int maThreadId);
+    void intercept(String classAnnotation, int caThreadId, String methodAnnotation, int maThreadId);
 
 }

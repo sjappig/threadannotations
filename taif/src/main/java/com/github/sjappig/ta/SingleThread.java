@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.TYPE })
 public @interface SingleThread {
-	/***
-	 * threadId: [0, Integer.MAX_VALUE]
-	 */
-	int threadId() default 0;
+    /***
+     * threadId: [0, Integer.MAX_VALUE]
+     */
+    int threadId() default 0;
 }
