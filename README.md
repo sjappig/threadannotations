@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sjappig/threadannotations.svg?branch=master)](https://travis-ci.org/sjappig/threadannotations)
+
 # threadannotations
 threadannotations is a light-weight Java-library for thread annotations with Java-agent to enforce them.
 
