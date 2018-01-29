@@ -1,8 +1,15 @@
+plugins {
+    id "com.jfrog.bintray" version "1.7.3" apply false
+}
+
 allprojects {
     version = '0.1'
 
+    apply plugin: 'com.jfrog.bintray'
     apply plugin: 'java'
     apply plugin: 'eclipse'
+    apply plugin: 'maven-publish'
+    apply plugin: 'java-library'
 
     repositories {
         jcenter()
@@ -11,5 +18,19 @@ allprojects {
     task srcJar(type: Jar, dependsOn: classes) {
         classifier = 'src'
         from sourceSets.main.allSource
+    }
+
+    bintray {
+        user = "$bintrayUser"
+        key = "$bintrayKey"
+        pkg {
+            repo = 'threadannotations'
+            name = 'threadannotations'
+            licenses = ['BSD 3-Clause']
+            vcsUrl = 'https://github.com/sjappig/threadannotations.git'
+            version {
+                name = "$project.version"
+            }
+        }
     }
 }

@@ -1,3 +1,18 @@
 jar {
     from "${rootProject.projectDir}/LICENSE"
 }
+
+publishing {
+    publications {
+        TAPublication(MavenPublication) {
+            from components.java
+            groupId 'io.threadannotations'
+            artifactId 'threadannotations'
+            version "$project.version"
+        }
+    }
+}
+
+bintray {
+    publications = ['TAPublication']
+}

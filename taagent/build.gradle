@@ -12,3 +12,18 @@ jar {
         from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
+publishing {
+    publications {
+        TAAgentPublication(MavenPublication) {
+            from components.java
+            groupId 'io.threadannotations'
+            artifactId 'threadannotations-agent'
+            version "$project.version"
+        }
+    }
+}
+
+bintray {
+    publications = ['TAAgentPublication']
+}
