@@ -1,5 +1,5 @@
 dependencies {
-    compile     project(':taif'),
+    compile     project(':threadannotations'),
                 'org.ow2.asm:asm:5.0.+'
     testCompile 'junit:junit:4.12'
 }

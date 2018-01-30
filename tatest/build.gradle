@@ -3,9 +3,9 @@ apply plugin: 'application'
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.+',
             'org.slf4j:slf4j-simple:1.7.+',
-            project(':taif')
-    runtime project(':taagent')
+            project(':threadannotations')
+    runtime project(':threadannotations-agent')
 }
 
 mainClassName = "io.threadannotations.TATest"
-applicationDefaultJvmArgs = ["-javaagent:" + project(':taagent').jar.archivePath]
+applicationDefaultJvmArgs = ["-javaagent:" + project(':threadannotations-agent').jar.archivePath]
