@@ -21,8 +21,8 @@ allprojects {
     }
 
     bintray {
-        user = "$bintrayUser"
-        key = "$bintrayKey"
+        user = project.hasProperty('bintrayUser') ? "$bintrayUser" : ""
+        key = project.hasProperty('bintrayKey') ? "$bintrayKey" : ""
         pkg {
             repo = 'threadannotations'
             name = 'threadannotations'
