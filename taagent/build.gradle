@@ -8,9 +8,6 @@ jar {
     manifest {
         attributes 'Premain-Class': 'io.threadannotations.TAAgent'
     }
-    doFirst {
-        from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
 }
 
 publishing {
