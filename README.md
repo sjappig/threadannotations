@@ -19,7 +19,7 @@ they cause no performance penalty.
     ```gradle
     repositories {
         maven {
-            url "https://dl.bintray.com/sjappig/threadannotations"
+            url 'https://dl.bintray.com/sjappig/threadannotations'
         }
     }
     ```
@@ -36,7 +36,7 @@ they cause no performance penalty.
     }
 
     dependencies {
-        testAgent("io.threadannotations:threadannotations-agent:+")
+        testAgent 'io.threadannotations:threadannotations-agent:+'
     }
 
     // assuming java-plugin
