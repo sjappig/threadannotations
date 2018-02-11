@@ -30,6 +30,7 @@ publishing {
     publications {
         TAAgentPublication(MavenPublication) {
             artifact shadowJar
+            artifact sourcesJar
             groupId 'io.threadannotations'
             artifactId 'threadannotations-agent'
             version "$project.version"

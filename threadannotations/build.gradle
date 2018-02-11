@@ -6,6 +6,7 @@ publishing {
     publications {
         TAPublication(MavenPublication) {
             from components.java
+            artifact sourcesJar
             groupId 'io.threadannotations'
             artifactId 'threadannotations'
             version "$project.version"
