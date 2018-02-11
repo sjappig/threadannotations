@@ -1,3 +1,7 @@
+plugins {
+    id 'com.github.johnrengelman.plugin-shadow' version '2.0.2'
+}
+
 dependencies {
     compile     project(':threadannotations'),
                 'org.ow2.asm:asm:5.0.+'
@@ -8,12 +12,24 @@ jar {
     manifest {
         attributes 'Premain-Class': 'io.threadannotations.TAAgent'
     }
+    classifier = 'no-deps'
 }
+
+shadowJar {
+    dependencies {
+        exclude project(':threadannotations')
+    }
+    relocate 'io.threadannotations', 'io.threadannotations'
+    relocate 'org.objectweb.asm', 'shadow.org.objectweb.asm'
+    classifier = null
+}
+
+build.dependsOn shadowJar
 
 publishing {
     publications {
         TAAgentPublication(MavenPublication) {
-            from components.java
+            artifact shadowJar
             groupId 'io.threadannotations'
             artifactId 'threadannotations-agent'
             version "$project.version"
