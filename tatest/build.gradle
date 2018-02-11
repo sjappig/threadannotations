@@ -7,5 +7,5 @@ dependencies {
     runtime project(':threadannotations-agent')
 }
 
-mainClassName = "io.threadannotations.TATest"
-applicationDefaultJvmArgs = ["-javaagent:" + project(':threadannotations-agent').jar.archivePath]
+mainClassName = 'io.threadannotations.TATest'
+applicationDefaultJvmArgs << '-javaagent:' + project(':threadannotations-agent').jar.archivePath
