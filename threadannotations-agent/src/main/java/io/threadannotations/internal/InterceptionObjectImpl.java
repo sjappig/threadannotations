@@ -19,17 +19,21 @@ public class InterceptionObjectImpl implements InterceptionObject {
 
     @Override
     public void intercept(String classAnnotation, int caThreadId, String methodAnnotation, int maThreadId) {
-        if (methodAnnotation.equals(SWING_THREAD_ANNOTATION_NAME)) {
-            handleSwingThread();
-        } else if (methodAnnotation.equals(SINGLE_THREAD_ANNOTATION_NAME)) {
-            handleSingleThread(maThreadId);
-        } else if (!methodAnnotation.equals(MULTI_THREAD_ANNOTATION_NAME)) {
-            if (classAnnotation.equals(SWING_THREAD_ANNOTATION_NAME)) {
-                handleSwingThread();
-            } else if (classAnnotation.equals(SINGLE_THREAD_ANNOTATION_NAME)) {
-                handleSingleThread(caThreadId);
-            }
+        if (!handleAnnotation(methodAnnotation, maThreadId)) {
+            handleAnnotation(classAnnotation, caThreadId);
         }
+    }
+
+    private boolean handleAnnotation(String annotation, int threadId) {
+        if (annotation.equals(SWING_THREAD_ANNOTATION_NAME)) {
+            handleSwingThread();
+            return true;
+        } else if (annotation.equals(SINGLE_THREAD_ANNOTATION_NAME)) {
+            handleSingleThread(threadId);
+            return true;
+        }
+
+        return annotation.equals(MULTI_THREAD_ANNOTATION_NAME);
     }
 
     private void handleSingleThread(int threadId) {
