@@ -1,0 +1,22 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+    maven {
+        url 'https://dl.bintray.com/sjappig/threadannotations'
+    }
+}
+
+configurations {
+    testAgent
+}
+
+dependencies {
+    compile 'net.jcip:jcip-annotations:1.0'
+    testAgent 'io.threadannotations:threadannotations-agent:+'
+}
+
+applicationDefaultJvmArgs << "-javaagent:${configurations.testAgent.singleFile}"
+
+mainClassName = 'io.threadannotations.examples.Main'
