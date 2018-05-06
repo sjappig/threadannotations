@@ -13,3 +13,9 @@ bin/
 # gradle
 ###################
 .gradle/
+
+
+# Vim
+###################
+.syntastic_*
+*.swp
