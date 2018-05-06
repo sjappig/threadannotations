@@ -91,7 +91,7 @@ class TAClassWriter extends ClassVisitor {
 
         private void addThreadAnnotationToStack(ThreadAnnotation threadAnnotation) {
             if (threadAnnotation != null) {
-                super.visitLdcInsn(threadAnnotation.annotation().getName());
+                super.visitLdcInsn(threadAnnotation.annotationClassName());
                 if (threadAnnotation.hasThreadId()) {
                     super.visitLdcInsn(threadAnnotation.threadId());
                 } else {

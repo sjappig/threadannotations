@@ -93,11 +93,11 @@ class ClassInfoVisitor extends ClassVisitor implements ClassAnnotationInfo {
         @Override
         public void visitEnd() {
             if (this.className.equals(MultiThread.class.getName())) {
-                this.receiver.threadAnnotation(new ThreadAnnotation(MultiThread.class));
+                this.receiver.threadAnnotation(new ThreadAnnotation(MultiThread.class.getName()));
             } else if (this.className.equals(SingleThread.class.getName())) {
-                this.receiver.threadAnnotation(new ThreadAnnotation(SingleThread.class, this.threadId));
+                this.receiver.threadAnnotation(new ThreadAnnotation(SingleThread.class.getName(), this.threadId));
             } else if (this.className.equals(SwingThread.class.getName())) {
-                this.receiver.threadAnnotation(new ThreadAnnotation(SwingThread.class));
+                this.receiver.threadAnnotation(new ThreadAnnotation(SwingThread.class.getName()));
             }
         }
     }

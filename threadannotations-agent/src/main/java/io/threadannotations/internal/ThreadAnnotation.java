@@ -1,24 +1,24 @@
 package io.threadannotations.internal;
 
 class ThreadAnnotation {
-    private final Class<?> annotation;
+    private final String annotationClassName;
     private final Integer threadId;
 
-    ThreadAnnotation(Class<?> annotation) {
-        this(annotation, null);
+    ThreadAnnotation(String annotationClassName) {
+        this(annotationClassName, null);
     }
 
-    ThreadAnnotation(Class<?> annotation, int threadId) {
-        this(annotation, Integer.valueOf(threadId));
+    ThreadAnnotation(String annotationClassName, int threadId) {
+        this(annotationClassName, Integer.valueOf(threadId));
     }
 
-    private ThreadAnnotation(Class<?> annotation, Integer threadId) {
-        this.annotation = annotation;
+    private ThreadAnnotation(String annotationClassName, Integer threadId) {
+        this.annotationClassName = annotationClassName;
         this.threadId = threadId;
     }
 
-    Class<?> annotation() {
-        return this.annotation;
+    String annotationClassName() {
+        return this.annotationClassName;
     }
 
     boolean hasThreadId() {
@@ -31,7 +31,7 @@ class ThreadAnnotation {
 
     @Override
     public String toString() {
-        return "ThreadAnnotation [annotation=" + this.annotation + ", threadId=" + this.threadId + "]";
+        return "ThreadAnnotation [annotationClassName=" + this.annotationClassName + ", threadId=" + this.threadId + "]";
     }
 
 }
