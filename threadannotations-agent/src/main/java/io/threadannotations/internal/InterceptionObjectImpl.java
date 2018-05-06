@@ -5,18 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.SwingUtilities;
 
-import io.threadannotations.MultiThread;
-import io.threadannotations.SingleThread;
-import io.threadannotations.SwingThread;
-
 public class InterceptionObjectImpl implements InterceptionObject {
-
-    static final String SWING_THREAD_ANNOTATION_NAME = SwingThread.class.getName();
-    static final String SINGLE_THREAD_ANNOTATION_NAME = SingleThread.class.getName();
-    static final String MULTI_THREAD_ANNOTATION_NAME = MultiThread.class.getName();
-
-    private static final String JCIP_THREAD_SAFE = "net.jcip.annotations.ThreadSafe";
-    private static final String JCIP_NOT_THREAD_SAFE = "net.jcip.annotations.NotThreadSafe";
 
     private final ConcurrentHashMap<Integer, WeakReference<Thread>> singleThreadMap = new ConcurrentHashMap<>();
 
@@ -40,15 +29,15 @@ public class InterceptionObjectImpl implements InterceptionObject {
     }
 
     private static boolean isOnlyForSwingThread(String annotation) {
-        return annotation.equals(SWING_THREAD_ANNOTATION_NAME);
+        return annotation.equals(KnownAnnotations.SWING_THREAD_ANNOTATION_NAME);
     }
 
     private static boolean isSingleThreaded(String annotation) {
-        return annotation.equals(SINGLE_THREAD_ANNOTATION_NAME) || annotation.equals(JCIP_NOT_THREAD_SAFE);
+        return annotation.equals(KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME) || annotation.equals(KnownAnnotations.JCIP_NOT_THREAD_SAFE);
     }
 
     private static boolean isMultiThreadingAllowed(String annotation) {
-        return annotation.equals(MULTI_THREAD_ANNOTATION_NAME) || annotation.equals(JCIP_THREAD_SAFE);
+        return annotation.equals(KnownAnnotations.MULTI_THREAD_ANNOTATION_NAME) || annotation.equals(KnownAnnotations.JCIP_THREAD_SAFE);
     }
 
     private void handleSingleThread(int threadId) {

@@ -1,8 +1,6 @@
 package io.threadannotations.internal;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,9 +15,6 @@ import org.junit.Test;
 import io.threadannotations.internal.InterceptionObjectImpl;
 
 public class TestInterceptionObjectImpl {
-
-    private static final List<String> ANNOTATIONS = Arrays.asList(InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME,
-            InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME);
 
     private InterceptionObjectImpl interceptionObjectImpl;
     private ExecutorService executorService;
@@ -37,88 +32,88 @@ public class TestInterceptionObjectImpl {
 
     @Test(expected = IllegalStateException.class)
     public void whenMethodSwingThreadAnnotationGivenAndInvokedFromNonSwingThreadShouldThrow() {
-        mainThreadInvoke("", 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+        mainThreadInvoke("", 0, KnownAnnotations.SWING_THREAD_ANNOTATION_NAME, 0);
     }
 
     @Test
     public void whenMethodSwingThreadAnnotationGivenAndInvokedFromSwingThreadShouldSucceed() throws Throwable {
-        swingThreadInvoke("", 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+        swingThreadInvoke("", 0, KnownAnnotations.SWING_THREAD_ANNOTATION_NAME, 0);
     }
 
     @Test(expected = IllegalStateException.class)
     public void whenClassSwingThreadAnnotationGivenAndInvokedFromNonSwingThreadShouldThrow() {
-        mainThreadInvoke(InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0, "", 0);
+        mainThreadInvoke(KnownAnnotations.SWING_THREAD_ANNOTATION_NAME, 0, "", 0);
     }
 
     @Test
     public void whenClassSwingThreadAnnotationGivenAndInvokedFromSwingThreadShouldSucceed() throws Throwable {
-        swingThreadInvoke(InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0, "", 0);
+        swingThreadInvoke(KnownAnnotations.SWING_THREAD_ANNOTATION_NAME, 0, "", 0);
     }
 
     @Test(expected = IllegalStateException.class)
     public void whenMethodSingleThreadAnnotationGivenAndInvokedInDifferentThreadsShouldThrow() throws Throwable {
-        mainThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
-        otherThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+        mainThreadInvoke("", 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 0);
+        otherThreadInvoke("", 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 0);
     }
 
     @Test
     public void whenMethodSingleThreadAnnotationGivenAndInvokedInOneThreadsShouldSucceed() throws Throwable {
-        mainThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
-        mainThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
-        otherThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 1);
-        otherThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 1);
-        swingThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 2);
-        swingThreadInvoke("", 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 2);
+        mainThreadInvoke("", 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 0);
+        mainThreadInvoke("", 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 0);
+        otherThreadInvoke("", 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 1);
+        otherThreadInvoke("", 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 1);
+        swingThreadInvoke("", 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 2);
+        swingThreadInvoke("", 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 2);
     }
 
     @Test(expected = IllegalStateException.class)
     public void whenClassSingleThreadAnnotationGivenAndInvokedInDifferentThreadsShouldThrow() throws Throwable {
-        mainThreadInvoke(InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0, "", 0);
-        otherThreadInvoke(InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0, "", 0);
+        mainThreadInvoke(KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 0, "", 0);
+        otherThreadInvoke(KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 0, "", 0);
     }
 
     @Test
     public void whenMethodMultiThreadAnnotationGivenShouldSucceedAlways() throws Throwable {
-        for (String annotation : ANNOTATIONS) {
-            mainThreadInvoke(annotation, 0, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME, 0);
-            swingThreadInvoke(annotation, 0, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME, 0);
-            otherThreadInvoke(annotation, 0, InterceptionObjectImpl.MULTI_THREAD_ANNOTATION_NAME, 0);
+        for (String annotation : KnownAnnotations.ANNOTATIONS) {
+            mainThreadInvoke(annotation, 0, KnownAnnotations.MULTI_THREAD_ANNOTATION_NAME, 0);
+            swingThreadInvoke(annotation, 0, KnownAnnotations.MULTI_THREAD_ANNOTATION_NAME, 0);
+            otherThreadInvoke(annotation, 0, KnownAnnotations.MULTI_THREAD_ANNOTATION_NAME, 0);
         }
     }
 
     @Test
     public void whenMethodSwingThreadAnnotationGivenShouldAlwaysRequireSwingThread() throws Throwable {
-        for (String annotation : ANNOTATIONS) {
+        for (String annotation : KnownAnnotations.ANNOTATIONS) {
             boolean mainThreadThrew = false;
             boolean otherThreadThrew = false;
             try {
-                mainThreadInvoke(annotation, 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+                mainThreadInvoke(annotation, 0, KnownAnnotations.SWING_THREAD_ANNOTATION_NAME, 0);
             } catch (IllegalStateException e) {
                 mainThreadThrew = true;
             }
             try {
-                otherThreadInvoke(annotation, 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+                otherThreadInvoke(annotation, 0, KnownAnnotations.SWING_THREAD_ANNOTATION_NAME, 0);
             } catch (IllegalStateException e) {
                 otherThreadThrew = true;
             }
             Assert.assertTrue(mainThreadThrew && otherThreadThrew);
-            swingThreadInvoke(annotation, 0, InterceptionObjectImpl.SWING_THREAD_ANNOTATION_NAME, 0);
+            swingThreadInvoke(annotation, 0, KnownAnnotations.SWING_THREAD_ANNOTATION_NAME, 0);
         }
     }
 
     @Test
     public void whenMethodSingleThreadAnnotationGivenShouldAlwaysRequireSameThread() throws Throwable {
-        for (String annotation : ANNOTATIONS) {
+        for (String annotation : KnownAnnotations.ANNOTATIONS) {
             boolean swingThreadThrew = false;
             boolean otherThreadThrew = false;
-            mainThreadInvoke(annotation, 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+            mainThreadInvoke(annotation, 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 0);
             try {
-                swingThreadInvoke(annotation, 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+                swingThreadInvoke(annotation, 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 0);
             } catch (IllegalStateException e) {
                 swingThreadThrew = true;
             }
             try {
-                otherThreadInvoke(annotation, 0, InterceptionObjectImpl.SINGLE_THREAD_ANNOTATION_NAME, 0);
+                otherThreadInvoke(annotation, 0, KnownAnnotations.SINGLE_THREAD_ANNOTATION_NAME, 0);
             } catch (IllegalStateException e) {
                 otherThreadThrew = true;
             }

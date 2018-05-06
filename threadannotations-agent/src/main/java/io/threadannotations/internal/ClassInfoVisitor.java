@@ -8,10 +8,6 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
-import io.threadannotations.MultiThread;
-import io.threadannotations.SingleThread;
-import io.threadannotations.SwingThread;
-
 class ClassInfoVisitor extends ClassVisitor implements ClassAnnotationInfo {
     private final String className;
     private final Map<MethodInfo, ThreadAnnotation> methodAnnotations = new HashMap<>();
@@ -92,12 +88,8 @@ class ClassInfoVisitor extends ClassVisitor implements ClassAnnotationInfo {
 
         @Override
         public void visitEnd() {
-            if (this.className.equals(MultiThread.class.getName())) {
-                this.receiver.threadAnnotation(new ThreadAnnotation(MultiThread.class.getName()));
-            } else if (this.className.equals(SingleThread.class.getName())) {
-                this.receiver.threadAnnotation(new ThreadAnnotation(SingleThread.class.getName(), this.threadId));
-            } else if (this.className.equals(SwingThread.class.getName())) {
-                this.receiver.threadAnnotation(new ThreadAnnotation(SwingThread.class.getName()));
+            if (KnownAnnotations.ANNOTATIONS.contains(this.className)) {
+                this.receiver.threadAnnotation(new ThreadAnnotation(this.className, this.threadId));
             }
         }
     }
