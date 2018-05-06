@@ -13,7 +13,7 @@ configurations {
 }
 
 dependencies {
-    compile 'net.jcip:jcip-annotations:1.0'
+    compile 'net.jcip:jcip-annotations:1.0', 'io.threadannotations:threadannotations:+'
     testAgent 'io.threadannotations:threadannotations-agent:+'
 }
 
