@@ -25,14 +25,26 @@ public class InterceptionObjectImpl implements InterceptionObject {
     }
 
     private boolean handleAnnotation(String annotation, int threadId) {
-        if (annotation.equals(SWING_THREAD_ANNOTATION_NAME)) {
+        if (isOnlyForSwingThread(annotation)) {
             handleSwingThread();
             return true;
-        } else if (annotation.equals(SINGLE_THREAD_ANNOTATION_NAME)) {
+        } else if (isSingleThreaded(annotation)) {
             handleSingleThread(threadId);
             return true;
         }
 
+        return isMultiThreadingAllowed(annotation);
+    }
+
+    private static boolean isOnlyForSwingThread(String annotation) {
+        return annotation.equals(SWING_THREAD_ANNOTATION_NAME);
+    }
+
+    private static boolean isSingleThreaded(String annotation) {
+        return annotation.equals(SINGLE_THREAD_ANNOTATION_NAME);
+    }
+
+    private static boolean isMultiThreadingAllowed(String annotation) {
         return annotation.equals(MULTI_THREAD_ANNOTATION_NAME);
     }
 
