@@ -15,6 +15,9 @@ public class InterceptionObjectImpl implements InterceptionObject {
     static final String SINGLE_THREAD_ANNOTATION_NAME = SingleThread.class.getName();
     static final String MULTI_THREAD_ANNOTATION_NAME = MultiThread.class.getName();
 
+    private static final String JCIP_THREAD_SAFE = "ThreadSafe";
+    private static final String JCIP_NOT_THREAD_SAFE = "NotThreadSafe";
+
     private final ConcurrentHashMap<Integer, WeakReference<Thread>> singleThreadMap = new ConcurrentHashMap<>();
 
     @Override
@@ -41,11 +44,11 @@ public class InterceptionObjectImpl implements InterceptionObject {
     }
 
     private static boolean isSingleThreaded(String annotation) {
-        return annotation.equals(SINGLE_THREAD_ANNOTATION_NAME);
+        return annotation.equals(SINGLE_THREAD_ANNOTATION_NAME) || annotation.equals(JCIP_NOT_THREAD_SAFE);
     }
 
     private static boolean isMultiThreadingAllowed(String annotation) {
-        return annotation.equals(MULTI_THREAD_ANNOTATION_NAME);
+        return annotation.equals(MULTI_THREAD_ANNOTATION_NAME) || annotation.equals(JCIP_THREAD_SAFE);
     }
 
     private void handleSingleThread(int threadId) {
