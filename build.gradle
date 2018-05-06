@@ -1,5 +1,7 @@
 plugins {
     id "com.jfrog.bintray" version "1.7.3" apply false
+    id "org.gradle.java"
+    id "com.scuilion.syntastic" version "0.3.8"
 }
 
 allprojects {
